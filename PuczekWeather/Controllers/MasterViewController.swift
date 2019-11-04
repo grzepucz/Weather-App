@@ -11,9 +11,10 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: CityDetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
 
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? CityDetailViewController
         }
     }
 
@@ -58,10 +59,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
             let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+            let controller = (segue.destination as! UINavigationController).topViewController as! CityDetailViewController
+            controller.location = appDelegate.location[indexPath.row]
+            controller.cityDetailForecast = object
+            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
@@ -69,7 +71,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return fetchedResultsController.sections?.count ?? 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,8 +81,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let event = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withEvent: event)
+        let _ = fetchedResultsController.object(at: indexPath)
+        
+        configureCell(cell, withLocation: appDelegate.location[indexPath.row])
         return cell
     }
 
@@ -108,6 +111,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func configureCell(_ cell: UITableViewCell, withEvent event: Event) {
         cell.textLabel!.text = event.timestamp!.description
     }
+    
+    func configureCell(_ cell: UITableViewCell, withLocation location: Coordinates) {
+        cell.textLabel!.text = location.name ?? "lat: " + String(location.latitude) + " long: " + String(location.longitude)
+    }
 
     // MARK: - Fetched results controller
 
@@ -119,7 +126,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         
         // Set the batch size to a suitable number.
-        fetchRequest.fetchBatchSize = 20
+        fetchRequest.fetchBatchSize = 3
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)

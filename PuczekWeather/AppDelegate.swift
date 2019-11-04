@@ -10,13 +10,35 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, DataProviderDelegate {
 
     var window: UIWindow?
-
+    var dataProvider: DataProvider?
+    var weather: WeatherModel?
+    var location: [Coordinates] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+//        // Override point for customization after application launch.
+//
+//        dataProvider = DataProvider(query: "?lang=pl&units=si");
+//        dataProvider?.delegate = self
+//        dataProvider?.getDataFromApi()
+        /*
+         Kraków
+         Warszawa
+         Stalowa Wola
+        */
+        location.removeAll()
+        location.append(Coordinates(latitude: 19.944544, longitude: 50.049683, name: "KRAKÓW"))
+        location.append(Coordinates(latitude: 21.017532, longitude: 52.237049, name: "WARSZAWA"))
+        location.append(Coordinates(latitude: 22.05334, longitude: 50.58286, name: "STALOWA WOLA"))
+        location.append(Coordinates(latitude: 19.944544, longitude: 50.049683, name: "KRAKÓW"))
+        location.append(Coordinates(latitude: 21.017532, longitude: 52.237049, name: "WARSZAWA"))
+        location.append(Coordinates(latitude: 22.05334, longitude: 50.58286, name: "STALOWA WOLA"))
+        location.append(Coordinates(latitude: 19.944544, longitude: 50.049683, name: "KRAKÓW"))
+        location.append(Coordinates(latitude: 21.017532, longitude: 52.237049, name: "WARSZAWA"))
+        location.append(Coordinates(latitude: 22.05334, longitude: 50.58286, name: "STALOWA WOLA"))
+        
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
@@ -56,8 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.detailItem == nil {
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? CityDetailViewController else { return false }
+        if topAsDetailController.cityDetailForecast == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }
@@ -108,5 +130,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
     }
 
+    func didFinish(_ provider: DataProvider) {
+        self.weather = dataProvider!.weather
+        print("finished " + String(self.weather!.currently.temperature))
+    }
 }
 
