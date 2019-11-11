@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class CityDetailViewController: UIViewController, DataProviderDelegate {
 
     var dailyForecastCollectionViewController: DailyForecastCollectionViewController? = nil
-    
     var dataProvider: DataProvider!
-    var location: Coordinates! = nil
+    var latitude: Double? = 50.4241
+    var longitude: Double? = 37.4124
+    var cityName: String? = "Undefined"
     var weather: WeatherModel!
+    var cellIndex: Int? = nil
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let dataHelper = CoreDataHelper()
     
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var pressure: UILabel!
@@ -27,17 +31,18 @@ class CityDetailViewController: UIViewController, DataProviderDelegate {
     @IBOutlet weak var wind: UILabel!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-//        if let split = splitViewController {
-//            let controllers = split.viewControllers
-//            dailyForecastCollectionViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DailyForecastCollectionViewController
-//        }
+        if let split = splitViewController {
+            let controllers = split.viewControllers
+            dailyForecastCollectionViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DailyForecastCollectionViewController
+        }
     }
     
     func configureView() {
         // Update the user interface for the detail item.
 
-        if cityDetailForecast != nil {
+        if weather != nil {
             if let label = temperature {
                 label.text = String(self.weather!.currently.temperature) + " st. C"
             }
@@ -54,17 +59,19 @@ class CityDetailViewController: UIViewController, DataProviderDelegate {
                 label.text = String(self.weather!.currently.precipProbability)
             }
             if let label = name {
-                label.text = self.location.name ?? "lat: " + String(self.location.latitude) + " long: " + String(self.location.longitude)
+                label.text = self.cityName ?? "lat: " + String(self.latitude!) + " long: " + String(self.longitude!)
             }
             if let icon = icon {
                 icon.image = UIImage(named: String(self.weather!.currently.icon + ".png"))
             }
+            
+            dataHelper.updateRecord(city: cityName!, icon: self.weather!.currently.icon, temperature: self.weather!.currently.temperature)
         }
     }
     
-    var cityDetailForecast: Event? {
+    var cityDetailForecast: NSManagedObject? {
         didSet {
-            self.dataProvider = DataProvider(latitude: location.latitude, longitude: location.longitude, query: "")
+            self.dataProvider = DataProvider(latitude: latitude!, longitude: longitude!, query: "", cityName: cityName)
             dataProvider?.delegate = self
             dataProvider?.getDataFromApi()
         }
@@ -81,8 +88,18 @@ class CityDetailViewController: UIViewController, DataProviderDelegate {
             controller.dailyForecast = self.weather!.daily
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
+        }
         
+        if segue.identifier == "showCityOnMap" {
+            let controller = segue.destination as! CityMapViewController
+            controller.longitude = self.longitude!
+            controller.latitude = self.latitude!
+            controller.name = self.cityName ?? ""
+            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftItemsSupplementBackButton = true
+            
         }
     }
+    
 }
 

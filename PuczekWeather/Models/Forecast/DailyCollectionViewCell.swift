@@ -12,4 +12,5 @@ class DailyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var summary: UILabel!
 }

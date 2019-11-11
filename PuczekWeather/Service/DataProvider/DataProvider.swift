@@ -7,9 +7,9 @@
 
 import Foundation
 
-let secret: String = "b97537869e85cb0d815424a516b2df41"
+let secret: String = "SECRET"
 let endpoint: String = "https://api.darksky.net/forecast/"
-let unitsQuery = "?lang=pl&units=si"
+let unitsQuery = "?lang=en&units=si"
 
 class DataProvider {
     var weather: WeatherModel?
@@ -17,13 +17,20 @@ class DataProvider {
     var urlString: String!
     var latitude: Double!
     var longitude: Double!
+    var cityName: String? = nil
     
-    init(latitude: Double, longitude: Double, query: String?) {
-        self.urlString = endpoint + secret + "/" + String(longitude) + "," + String(latitude)
+    init(latitude: Double, longitude: Double, query: String?, cityName: String?) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.urlString = endpoint + secret + "/" + String(latitude) + "," + String(longitude)
         self.weather = nil
         
         if (query != nil) {
             self.urlString = self.urlString + unitsQuery + "&" + query!
+        }
+        
+        if (cityName != nil) {
+            self.cityName = cityName
         }
     }
     

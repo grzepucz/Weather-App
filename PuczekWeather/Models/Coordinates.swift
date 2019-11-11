@@ -8,27 +8,25 @@
 
 import Foundation
 
-public class Coordinates {
-    var latitude: Double
-    var longitude: Double
+class Coordinates : Codable {
+    let latitude: Double
+    let longitude: Double
+    let name: String
     var weather: WeatherModel?
-    var name: String?
     
-    init(latitude: Double, longitude: Double, name: String?) {
+    init(latitude: Double, longitude: Double, name: String) {
         self.latitude = latitude
         self.longitude = longitude
-    
-        if (name != nil) {
-            self.setName(name: name!)
-        }
+        self.name = name
     }
     
     func setWeather(weather: WeatherModel) {
         self.weather = weather
     }
     
-    func setName(name: String) {
-        self.name = name
+    enum CodingKeys: String, CodingKey {
+        case latitude
+        case longitude
+        case name
     }
-    
 }

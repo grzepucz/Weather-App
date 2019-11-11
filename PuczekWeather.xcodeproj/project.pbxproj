@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7327CAE52379FF78003C84CA /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7327CAE42379FF78003C84CA /* CoreDataHelper.swift */; };
+		73699BD123778F290088AB7E /* CityMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73699BD023778F290088AB7E /* CityMapViewController.swift */; };
+		737BB90E2371FD0700183428 /* CityShortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BB90D2371FD0700183428 /* CityShortTableViewCell.swift */; };
+		737BB91023720F3E00183428 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BB90F23720F3E00183428 /* SearchLocationViewController.swift */; };
+		737BB9122372121000183428 /* SearchLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BB9112372121000183428 /* SearchLocationTableViewCell.swift */; };
 		73D20C702370C4EC00F08369 /* DailyForecastCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D20C6F2370C4EC00F08369 /* DailyForecastCollectionViewController.swift */; };
 		73D20C722370C51700F08369 /* DailyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D20C712370C51700F08369 /* DailyForecastViewController.swift */; };
 		73D20C742370C52C00F08369 /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D20C732370C52C00F08369 /* DailyCollectionViewCell.swift */; };
@@ -30,6 +35,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7327CAE42379FF78003C84CA /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		73699BD023778F290088AB7E /* CityMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityMapViewController.swift; sourceTree = "<group>"; };
+		737BB90D2371FD0700183428 /* CityShortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityShortTableViewCell.swift; sourceTree = "<group>"; };
+		737BB90F23720F3E00183428 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
+		737BB9112372121000183428 /* SearchLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationTableViewCell.swift; sourceTree = "<group>"; };
 		73D20C6F2370C4EC00F08369 /* DailyForecastCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastCollectionViewController.swift; sourceTree = "<group>"; };
 		73D20C712370C51700F08369 /* DailyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewController.swift; sourceTree = "<group>"; };
 		73D20C732370C52C00F08369 /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -72,6 +82,8 @@
 				73F09458236B05BD007D40A7 /* CityDetailViewController.swift */,
 				73D20C6F2370C4EC00F08369 /* DailyForecastCollectionViewController.swift */,
 				73D20C712370C51700F08369 /* DailyForecastViewController.swift */,
+				737BB90F23720F3E00183428 /* SearchLocationViewController.swift */,
+				73699BD023778F290088AB7E /* CityMapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -82,6 +94,7 @@
 				73F0946A236B061A007D40A7 /* DataProvider */,
 				73F0947D236C5744007D40A7 /* CityChooser */,
 				73D20C752370C96E00F08369 /* DateHelper.swift */,
+				7327CAE42379FF78003C84CA /* CoreDataHelper.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -144,6 +157,8 @@
 				73F09472236B0A28007D40A7 /* HourlyForecast.swift */,
 				73F09478236B0CC8007D40A7 /* CurrentlyForecast.swift */,
 				73D20C732370C52C00F08369 /* DailyCollectionViewCell.swift */,
+				737BB90D2371FD0700183428 /* CityShortTableViewCell.swift */,
+				737BB9112372121000183428 /* SearchLocationTableViewCell.swift */,
 			);
 			path = Forecast;
 			sourceTree = "<group>";
@@ -236,14 +251,19 @@
 				73F09481236C576C007D40A7 /* CityChooserDelegate.swift in Sources */,
 				73D20C702370C4EC00F08369 /* DailyForecastCollectionViewController.swift in Sources */,
 				73F09455236B05BD007D40A7 /* PuczekWeather.xcdatamodeld in Sources */,
+				7327CAE52379FF78003C84CA /* CoreDataHelper.swift in Sources */,
+				737BB91023720F3E00183428 /* SearchLocationViewController.swift in Sources */,
 				73F09452236B05BD007D40A7 /* AppDelegate.swift in Sources */,
 				73D20C762370C96E00F08369 /* DateHelper.swift in Sources */,
 				73D20C722370C51700F08369 /* DailyForecastViewController.swift in Sources */,
 				73F09457236B05BD007D40A7 /* MasterViewController.swift in Sources */,
+				73699BD123778F290088AB7E /* CityMapViewController.swift in Sources */,
 				73F09459236B05BD007D40A7 /* CityDetailViewController.swift in Sources */,
 				73F09475236B0AC9007D40A7 /* DataProvider.swift in Sources */,
 				73F0946C236B07C1007D40A7 /* WeatherModel.swift in Sources */,
 				73F09477236B0AD5007D40A7 /* DataProviderDelegate.swift in Sources */,
+				737BB90E2371FD0700183428 /* CityShortTableViewCell.swift in Sources */,
+				737BB9122372121000183428 /* SearchLocationTableViewCell.swift in Sources */,
 				73F09479236B0CC8007D40A7 /* CurrentlyForecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +410,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PuczekWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -398,6 +419,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agh.edu.pl.PuczekWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -407,7 +429,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PuczekWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -415,6 +438,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agh.edu.pl.PuczekWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

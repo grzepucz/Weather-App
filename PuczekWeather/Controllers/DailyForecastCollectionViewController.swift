@@ -55,7 +55,8 @@ class DailyForecastCollectionViewController: UICollectionViewController {
         cell.date?.text = DateHelper.getDateWithWeekday(dateTime: element.time)
         cell.temperature?.text = String(element.temperatureMax) + " st. C"
         cell.icon?.image = UIImage(named: String(element.icon + ".png"))
-    
+        cell.summary?.text = element.summary
+        
         return cell
     }
 
